@@ -1,7 +1,7 @@
 ﻿
 namespace Pet_As_Service
 {
-    partial class frmbBuscaDeRacas
+    partial class FrmbBuscaDeRacas
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace Pet_As_Service
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmbBuscaDeRacas));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmbBuscaDeRacas));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,10 +37,10 @@ namespace Pet_As_Service
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.cbxRacaGato = new System.Windows.Forms.ComboBox();
+            this.lblTemperamento = new System.Windows.Forms.Label();
+            this.lblOrigem = new System.Windows.Forms.Label();
+            this.lblDescricao = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnFavoritar = new System.Windows.Forms.Button();
@@ -119,46 +119,47 @@ namespace Pet_As_Service
             this.label7.TabIndex = 6;
             this.label7.Text = "Descrição";
             // 
-            // comboBox1
+            // cbxRacaGato
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(195, 91);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(124, 21);
-            this.comboBox1.TabIndex = 7;
-            this.comboBox1.Text = "Selecione uma Raça";
+            this.cbxRacaGato.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxRacaGato.FormattingEnabled = true;
+            this.cbxRacaGato.Location = new System.Drawing.Point(195, 91);
+            this.cbxRacaGato.Name = "cbxRacaGato";
+            this.cbxRacaGato.Size = new System.Drawing.Size(124, 21);
+            this.cbxRacaGato.TabIndex = 7;
             // 
-            // label8
+            // lblTemperamento
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(192, 128);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(55, 13);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Resultado";
+            this.lblTemperamento.AutoSize = true;
+            this.lblTemperamento.Location = new System.Drawing.Point(192, 128);
+            this.lblTemperamento.Name = "lblTemperamento";
+            this.lblTemperamento.Size = new System.Drawing.Size(55, 13);
+            this.lblTemperamento.TabIndex = 8;
+            this.lblTemperamento.Text = "Resultado";
             // 
-            // label9
+            // lblOrigem
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(192, 162);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(55, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Resultado";
+            this.lblOrigem.AutoSize = true;
+            this.lblOrigem.Location = new System.Drawing.Point(192, 162);
+            this.lblOrigem.Name = "lblOrigem";
+            this.lblOrigem.Size = new System.Drawing.Size(55, 13);
+            this.lblOrigem.TabIndex = 9;
+            this.lblOrigem.Text = "Resultado";
             // 
-            // label10
+            // lblDescricao
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(192, 196);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(55, 13);
-            this.label10.TabIndex = 10;
-            this.label10.Text = "Resultado";
+            this.lblDescricao.AutoSize = true;
+            this.lblDescricao.Location = new System.Drawing.Point(192, 196);
+            this.lblDescricao.MaximumSize = new System.Drawing.Size(200, 0);
+            this.lblDescricao.Name = "lblDescricao";
+            this.lblDescricao.Size = new System.Drawing.Size(55, 13);
+            this.lblDescricao.TabIndex = 10;
+            this.lblDescricao.Text = "Resultado";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Pet_As_Service.Properties.Resources.Cat_on_computer;
-            this.pictureBox1.Location = new System.Drawing.Point(42, 230);
+            this.pictureBox1.Location = new System.Drawing.Point(34, 304);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(350, 165);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -168,35 +169,36 @@ namespace Pet_As_Service
             // btnBuscar
             // 
             this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(281, 400);
+            this.btnBuscar.Location = new System.Drawing.Point(273, 474);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(56, 23);
             this.btnBuscar.TabIndex = 12;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnFavoritar
             // 
             this.btnFavoritar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFavoritar.Location = new System.Drawing.Point(343, 400);
+            this.btnFavoritar.Location = new System.Drawing.Point(335, 474);
             this.btnFavoritar.Name = "btnFavoritar";
             this.btnFavoritar.Size = new System.Drawing.Size(65, 23);
             this.btnFavoritar.TabIndex = 13;
             this.btnFavoritar.Text = "Favoritar";
             this.btnFavoritar.UseVisualStyleBackColor = true;
             // 
-            // frmbBuscaDeRacas
+            // FrmbBuscaDeRacas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 432);
+            this.ClientSize = new System.Drawing.Size(434, 502);
             this.Controls.Add(this.btnFavoritar);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.lblDescricao);
+            this.Controls.Add(this.lblOrigem);
+            this.Controls.Add(this.lblTemperamento);
+            this.Controls.Add(this.cbxRacaGato);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -204,9 +206,14 @@ namespace Pet_As_Service
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmbBuscaDeRacas";
+            this.MaximizeBox = false;
+            this.Name = "FrmbBuscaDeRacas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Raças";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmbBuscaDeRacas_FormClosed);
+            this.Load += new System.EventHandler(this.FrmbBuscaDeRacas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -222,10 +229,10 @@ namespace Pet_As_Service
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cbxRacaGato;
+        private System.Windows.Forms.Label lblTemperamento;
+        private System.Windows.Forms.Label lblOrigem;
+        private System.Windows.Forms.Label lblDescricao;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnFavoritar;

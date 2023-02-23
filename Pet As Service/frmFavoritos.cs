@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace Pet_As_Service
 {
-    public partial class frmFavoritos : Form
+    public partial class FrmFavoritos : Form
     {
-        public frmFavoritos()
+        public FrmFavoritos()
         {
             InitializeComponent();
         }
+
+        private void frmFavoritos_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Form frmPrincipal = new FrmPrincipal();
+            frmPrincipal.Show();
+        }
+
     }
 }

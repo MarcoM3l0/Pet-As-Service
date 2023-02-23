@@ -10,11 +10,32 @@ using System.Windows.Forms;
 
 namespace Pet_As_Service
 {
-    public partial class frmPrincipal : Form
+    public partial class FrmPrincipal : Form
     {
-        public frmPrincipal()
+        public FrmPrincipal()
         {
             InitializeComponent();
+        }
+
+
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buscarRacasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmbBuscaDeRacas = new FrmbBuscaDeRacas();
+            this.Hide();
+            frmbBuscaDeRacas.Show();
+
+        }
+
+        private void meusFavoritosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frmFavoritos = new FrmFavoritos();
+            this.Hide();
+            frmFavoritos.Show();
         }
     }
 }

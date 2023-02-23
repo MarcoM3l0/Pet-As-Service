@@ -1,7 +1,7 @@
 ﻿
 namespace Pet_As_Service
 {
-    partial class frmPrincipal
+    partial class FrmPrincipal
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -29,9 +29,9 @@ namespace Pet_As_Service
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.menuPrincipal = new System.Windows.Forms.MenuStrip();
-            this.buscarRaçasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buscarRacasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.meusFavoritosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -42,7 +42,7 @@ namespace Pet_As_Service
             // menuPrincipal
             // 
             this.menuPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buscarRaçasToolStripMenuItem,
+            this.buscarRacasToolStripMenuItem,
             this.meusFavoritosToolStripMenuItem});
             this.menuPrincipal.Location = new System.Drawing.Point(0, 0);
             this.menuPrincipal.Name = "menuPrincipal";
@@ -50,17 +50,19 @@ namespace Pet_As_Service
             this.menuPrincipal.TabIndex = 0;
             this.menuPrincipal.Text = "menuPrincipal";
             // 
-            // buscarRaçasToolStripMenuItem
+            // buscarRacasToolStripMenuItem
             // 
-            this.buscarRaçasToolStripMenuItem.Name = "buscarRaçasToolStripMenuItem";
-            this.buscarRaçasToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
-            this.buscarRaçasToolStripMenuItem.Text = "Buscar Raças";
+            this.buscarRacasToolStripMenuItem.Name = "buscarRacasToolStripMenuItem";
+            this.buscarRacasToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.buscarRacasToolStripMenuItem.Text = "Buscar Raças";
+            this.buscarRacasToolStripMenuItem.Click += new System.EventHandler(this.buscarRacasToolStripMenuItem_Click);
             // 
             // meusFavoritosToolStripMenuItem
             // 
             this.meusFavoritosToolStripMenuItem.Name = "meusFavoritosToolStripMenuItem";
             this.meusFavoritosToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
             this.meusFavoritosToolStripMenuItem.Text = "Meus Favoritos";
+            this.meusFavoritosToolStripMenuItem.Click += new System.EventHandler(this.meusFavoritosToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -82,7 +84,7 @@ namespace Pet_As_Service
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // Principal
+            // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -90,9 +92,12 @@ namespace Pet_As_Service
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuPrincipal);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuPrincipal;
-            this.Name = "Principal";
+            this.MaximizeBox = false;
+            this.Name = "FrmPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bem vindo ao Cat as Service";
             this.menuPrincipal.ResumeLayout(false);
             this.menuPrincipal.PerformLayout();
@@ -105,7 +110,7 @@ namespace Pet_As_Service
         #endregion
 
         private System.Windows.Forms.MenuStrip menuPrincipal;
-        private System.Windows.Forms.ToolStripMenuItem buscarRaçasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buscarRacasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem meusFavoritosToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
