@@ -24,9 +24,9 @@ namespace Pet_As_Service.APIService
         {
             try
             {
-                var cliente = new RestClient("https://api.thecatapi.com/v1/breeds/search?");
+                RestClient cliente = new RestClient("https://api.thecatapi.com/v1/breeds/search?");
                 cliente.AddDefaultParameter("q", id);
-                var request = new RestRequest(Method.GET);
+                RestRequest request = new RestRequest(Method.GET);
                 IRestResponse response = cliente.Execute(request);
                 json = response.Content.ToString();
 
@@ -46,20 +46,78 @@ namespace Pet_As_Service.APIService
             
         }
 
+        public List<string> GetCatFavourites()
+        {
+            try
+            {
+                // Obetem os gatos favoritados
+                RestClient clientFav = new RestClient("https://api.thecatapi.com/v1/favourites?sub_id=user-123");
+                RestRequest requestFav = new RestRequest(Method.GET);
+                requestFav.AddHeader("Content-Type", "application/json");
+                requestFav.AddHeader("x-api-Key", api_key);
+                IRestResponse responseFav = clientFav.Execute(requestFav);
+
+                // Obetem as raças de gatos
+                RestClient clientBre = new RestClient("https://api.thecatapi.com/v1");
+                RestRequest requestBre = new RestRequest("breeds/", Method.GET);
+                requestBre.AddHeader("x-api-key", api_key);
+                IRestResponse responseBre = clientBre.Execute(requestBre);
+
+                // Lista para armazenar os nomes dos gatos correspondentes
+                List<string> names = new List<string>();
+
+                // Verifica se a resposta foi bem sucedida
+                if (responseFav.IsSuccessful && responseBre.IsSuccessful)
+                {
+                    // Obtém os dados dos gatos favoritados e das raças de gatos
+                    List<FavoriteCat> favoriteCats = JsonConvert.DeserializeObject<List<FavoriteCat>>(responseFav.Content);
+                    List<CatModel> breedCats = JsonConvert.DeserializeObject<List<CatModel>>(responseBre.Content);
+
+                    // Loop que percorre todos os gatos favoritados
+                    foreach (FavoriteCat favoriteCat in favoriteCats)
+                    {
+                        // Busca o gato correspondente na lista de raças de gatos
+                        CatModel breedCat = breedCats.Find(c => c.id == favoriteCat.image_id);
+
+                        // Verifica se encontrou o gato correspondente
+                        if (breedCat != null)
+                        {
+                            // Imprime o nome do gato correspondente
+                            names.Add(breedCat.name);
+                        }
+                    }
+
+                    return names;
+                }
+                else
+                {
+                    // Imprime a mensagem de erro
+                    MessageBox.Show("Erro ao obter os gatos favoritados ou as raças de gatos.");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocorreu um erro durante a execução do método GetCatFavourites: {ex.Message}");
+                return null;
+            }
+
+        }
+
         public List<string> GetCatBreeds()
         {
             try
             {
                 RestClient client = new RestClient("https://api.thecatapi.com/v1");
-                var request = new RestRequest("breeds/", Method.GET);
+                RestRequest request = new RestRequest("breeds/", Method.GET);
                 request.AddHeader("x-api-key", api_key); // Substitua isso pela sua chave da API
 
-                var response = client.Execute(request);
+                IRestResponse response = client.Execute(request);
 
                 if (response.IsSuccessful)
                 {
                     var breedsJson = response.Content;
-                    var breeds = JArray.Parse(breedsJson);
+                    JArray breeds = JArray.Parse(breedsJson);
 
                     // Aqui você pode converter a lista de JObjects em uma lista de strings ou fazer qualquer outra coisa com ela.
                     var breedNames = breeds.Select(b => b["name"].ToString()).ToList();
@@ -84,8 +142,8 @@ namespace Pet_As_Service.APIService
         {
             try
             {
-                var client = new RestClient("https://api.thecatapi.com/v1/favourites");
-                var request = new RestRequest(Method.POST);
+                RestClient client = new RestClient("https://api.thecatapi.com/v1/favourites");
+                RestRequest request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 request.AddHeader("x-api-Key", api_key);
                 request.AddParameter("application/json", "{\n    \"image_id\":\"" + imageId + "\",\n\t\t\"sub_id\":\"user-123\"\n}", ParameterType.RequestBody);

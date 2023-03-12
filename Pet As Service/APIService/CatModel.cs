@@ -14,5 +14,11 @@ namespace Pet_As_Service.APIService
 
     }
 
+    public class FavoriteCat
+    {
+        public string id { get; set; }
+        public string image_id { get; set; }
+    }
+
 }
 
