@@ -20,5 +20,11 @@ namespace Pet_As_Service.APIService
         public string image_id { get; set; }
     }
 
+    public class CatStored
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+    }
+
 }
 

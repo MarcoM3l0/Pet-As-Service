@@ -37,7 +37,7 @@ namespace Pet_As_Service
 
         private void btnFavoritar_Click(object sender, EventArgs e)
         {
-            CatClient.AdicionarFavorito(FavoritoIdImage, FavoritoNome);
+            CatClient.AddFavourite(FavoritoIdImage, FavoritoNome);
             cbxRacaGato.SelectedIndex = 0;
             Limpar();
             cbxRacaGato.Focus();
