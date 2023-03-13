@@ -18,7 +18,6 @@ namespace Pet_As_Service.APIService
     {
         public string json;
         private readonly HttpClient httpClient = new HttpClient();
-
         private string api_key = "use sua api key";
 
         //Esse método utiliza a API do TheCatAPI para buscar informações sobre uma raça de gato

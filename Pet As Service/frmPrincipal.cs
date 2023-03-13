@@ -25,17 +25,17 @@ namespace Pet_As_Service
 
         private void buscarRacasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frmbBuscaDeRacas = new FrmbBuscaDeRacas();
-            this.Hide();
+            FrmbBuscaDeRacas frmbBuscaDeRacas = new FrmbBuscaDeRacas();
             frmbBuscaDeRacas.Show();
+            this.Hide();
 
         }
 
         private void meusFavoritosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form frmFavoritos = new FrmFavoritos();
-            this.Hide();
             frmFavoritos.Show();
+            this.Hide();
         }
-    }
+    }//Fim
 }
