@@ -21,7 +21,7 @@ namespace Pet_As_Service.APIService
         private string api_key = "sua api key";
 
         //Esse método utiliza a API do TheCatAPI para buscar informações sobre uma raça de gato
-        //especificada pelo parâmetro id, que é o nome da raça.
+        //especificada pelo parâmetro id, que é o nome da raça
         public CatModel GetCat(string id)
         {
             try
