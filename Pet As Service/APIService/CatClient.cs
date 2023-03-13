@@ -18,8 +18,11 @@ namespace Pet_As_Service.APIService
     {
         public string json;
         private readonly HttpClient httpClient = new HttpClient();
+
         private string api_key = "use sua api key";
 
+        //Esse método utiliza a API do TheCatAPI para buscar informações sobre uma raça de gato
+        //especificada pelo parâmetro id, que é o nome da raça
         public CatModel GetCat(string id)
         {
             try
@@ -46,64 +49,7 @@ namespace Pet_As_Service.APIService
             
         }
 
-        public List<string> GetCatFavourites()
-        {
-            try
-            {
-                // Obetem os gatos favoritados
-                RestClient clientFav = new RestClient("https://api.thecatapi.com/v1/favourites?sub_id=user-123");
-                RestRequest requestFav = new RestRequest(Method.GET);
-                requestFav.AddHeader("Content-Type", "application/json");
-                requestFav.AddHeader("x-api-Key", api_key);
-                IRestResponse responseFav = clientFav.Execute(requestFav);
-
-                // Obetem as raças de gatos
-                RestClient clientBre = new RestClient("https://api.thecatapi.com/v1");
-                RestRequest requestBre = new RestRequest("breeds/", Method.GET);
-                requestBre.AddHeader("x-api-key", api_key);
-                IRestResponse responseBre = clientBre.Execute(requestBre);
-
-                // Lista para armazenar os nomes dos gatos correspondentes
-                List<string> names = new List<string>();
-
-                // Verifica se a resposta foi bem sucedida
-                if (responseFav.IsSuccessful && responseBre.IsSuccessful)
-                {
-                    // Obtém os dados dos gatos favoritados e das raças de gatos
-                    List<FavoriteCat> favoriteCats = JsonConvert.DeserializeObject<List<FavoriteCat>>(responseFav.Content);
-                    List<CatModel> breedCats = JsonConvert.DeserializeObject<List<CatModel>>(responseBre.Content);
-
-                    // Loop que percorre todos os gatos favoritados
-                    foreach (FavoriteCat favoriteCat in favoriteCats)
-                    {
-                        // Busca o gato correspondente na lista de raças de gatos
-                        CatModel breedCat = breedCats.Find(c => c.id == favoriteCat.image_id);
-
-                        // Verifica se encontrou o gato correspondente
-                        if (breedCat != null)
-                        {
-                            // Imprime o nome do gato correspondente
-                            names.Add(breedCat.name);
-                        }
-                    }
-
-                    return names;
-                }
-                else
-                {
-                    // Imprime a mensagem de erro
-                    MessageBox.Show("Erro ao obter os gatos favoritados ou as raças de gatos.");
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ocorreu um erro durante a execução do método GetCatFavourites: {ex.Message}");
-                return null;
-            }
-
-        }
-
+        //Este é método usa a API TheCatAPI para obter uma lista de raças de gatos.
         public List<string> GetCatBreeds()
         {
             try
@@ -137,8 +83,8 @@ namespace Pet_As_Service.APIService
 
         }
 
-
-        public void AdicionarFavorito(string imageId, string breeds)
+        //Esse método realiza uma requisição HTTP POST para adicionar um gato como favorito na API.
+        public void AddFavourite(string imageId, string breeds)
         {
             try
             {
@@ -164,5 +110,94 @@ namespace Pet_As_Service.APIService
             }
             
         }
-    }
+
+        // O método é responsável por obter a lista de gatos favoritados pelo usuário e o nome das raças desses gatos.
+        public List<CatStored> GetCatFavourites()
+        {
+            try
+            {
+                // Obetem os gatos favoritados
+                RestClient clientFav = new RestClient("https://api.thecatapi.com/v1/favourites?sub_id=user-123");
+                RestRequest requestFav = new RestRequest(Method.GET);
+                requestFav.AddHeader("Content-Type", "application/json");
+                requestFav.AddHeader("x-api-Key", api_key);
+                IRestResponse responseFav = clientFav.Execute(requestFav);
+
+                // Obetem as raças de gatos
+                RestClient clientBre = new RestClient("https://api.thecatapi.com/v1");
+                RestRequest requestBre = new RestRequest("breeds/", Method.GET);
+                requestBre.AddHeader("x-api-key", api_key);
+                IRestResponse responseBre = clientBre.Execute(requestBre);
+
+                // Lista para armazenar os nomes e os ids dos gatos favoritados
+                List<CatStored> names = new List<CatStored>();
+
+
+                // Verifica se a resposta foi bem sucedida
+                if (responseFav.IsSuccessful && responseBre.IsSuccessful)
+                {
+                    // Obtém os dados dos gatos favoritados e das raças de gatos
+                    List<FavoriteCat> favoriteCats = JsonConvert.DeserializeObject<List<FavoriteCat>>(responseFav.Content);
+                    List<CatModel> breedCats = JsonConvert.DeserializeObject<List<CatModel>>(responseBre.Content);
+
+                    // Loop que percorre todos os gatos favoritados
+                    foreach (FavoriteCat favoriteCat in favoriteCats)
+                    {
+                        // Busca o gato correspondente na lista de raças de gatos
+                        CatModel breedCat = breedCats.Find(c => c.id == favoriteCat.image_id);
+
+                        // Verifica se encontrou o gato correspondente
+                        if (breedCat != null)
+                        {
+                            // Imprime o nome do gato correspondente
+                            CatStored nome = new CatStored { id = favoriteCat.id, name = breedCat.name };
+                            names.Add(nome);
+                        }
+                    }
+
+                    return names;
+                }
+                else
+                {
+                    // Imprime a mensagem de erro
+                    MessageBox.Show("Erro ao obter os gatos favoritados ou as raças de gatos.");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocorreu um erro durante a execução do método GetCatFavourites: {ex.Message}");
+                return null;
+            }
+
+        }
+
+        // Método responsável por deletar uma raça dos favoritos
+        // Recebe como parâmetros o id e o nome da raça a ser deletada
+        public void DeleteFavourite(string id, string name)
+        {
+            try
+            {
+                RestClient client = new RestClient($"https://api.thecatapi.com/v1/favourites/{id}");
+                RestRequest request = new RestRequest(Method.DELETE);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("x-api-Key", api_key);
+                IRestResponse response = client.Execute(request);
+
+                if (response.IsSuccessful)
+                {
+                    MessageBox.Show($"Raça {name} deletada dos favoritos com sucesso!");
+                }
+                else
+                {
+                    MessageBox.Show($"Erro ao adicionar favorito. Código de status HTTP: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocorreu um erro durante a execução do método DeleteFavourite: {ex.Message}");
+            }
+        }
+            
+    }//Fim
 }
