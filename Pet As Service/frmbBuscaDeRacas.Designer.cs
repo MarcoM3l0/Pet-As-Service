@@ -179,6 +179,7 @@ namespace Pet_As_Service
             // 
             // btnFavoritar
             // 
+            this.btnFavoritar.Enabled = false;
             this.btnFavoritar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFavoritar.Location = new System.Drawing.Point(335, 474);
             this.btnFavoritar.Name = "btnFavoritar";
@@ -186,6 +187,7 @@ namespace Pet_As_Service
             this.btnFavoritar.TabIndex = 13;
             this.btnFavoritar.Text = "Favoritar";
             this.btnFavoritar.UseVisualStyleBackColor = true;
+            this.btnFavoritar.Click += new System.EventHandler(this.btnFavoritar_Click);
             // 
             // FrmbBuscaDeRacas
             // 
@@ -213,7 +215,6 @@ namespace Pet_As_Service
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Raças";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmbBuscaDeRacas_FormClosed);
-            this.Load += new System.EventHandler(this.FrmbBuscaDeRacas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

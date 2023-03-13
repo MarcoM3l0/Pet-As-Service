@@ -1,28 +1,22 @@
 ﻿using System;
 using Pet_As_Service.APIService;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 using System.Windows.Forms;
 
 namespace Pet_As_Service
 {
     public partial class FrmbBuscaDeRacas : Form
     {
-        private CatClient CatClient;
+        private readonly CatClient CatClient;
+        private string FavoritoNome;
+        string FavoritoIdImage;
+
         public FrmbBuscaDeRacas()
         {
             InitializeComponent();
             CatClient = new CatClient();
             FillBreedsComboBox();
-        }
-
-        private void FrmbBuscaDeRacas_Load(object sender, EventArgs e)
-        {
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -31,12 +25,23 @@ namespace Pet_As_Service
             {
                 string idRaca = cbxRacaGato.Text;
                 CarregarRaca(CatClient.GetCat(idRaca));
+                btnFavoritar.Enabled = true;
             }
             else
             {
                 MessageBox.Show("Selecione uma Raça");
+                cbxRacaGato.Focus();
                 Limpar();
             }
+        }
+
+        private void btnFavoritar_Click(object sender, EventArgs e)
+        {
+            CatClient.AdicionarFavorito(FavoritoIdImage, FavoritoNome);
+            cbxRacaGato.SelectedIndex = 0;
+            Limpar();
+            cbxRacaGato.Focus();
+            btnFavoritar.Enabled = false;
         }
 
 
@@ -62,7 +67,11 @@ namespace Pet_As_Service
         {
             lblDescricao.Text = resultado.description;
             lblOrigem.Text = resultado.origin;
-            lblTemperamento.Text = resultado.temperameny;
+            lblTemperamento.Text = resultado.temperament;
+            FavoritoNome = resultado.name;
+            FavoritoIdImage = resultado.id;
+
+
         }
 
         private void Limpar()
@@ -76,7 +85,6 @@ namespace Pet_As_Service
         {
             Form frmPrincipal = new FrmPrincipal();
             frmPrincipal.Show();
-
         }
 
     }
